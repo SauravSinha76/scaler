@@ -13,7 +13,14 @@ def solve(A):
 
     return max(max1 - min1, max2 - min2)
 
+def solve1(A):
+    res =[]
 
+    for i in range(len(A)):
+        res.append(A[i] - i)
+
+    print(res)
 
 A = [1, 3, -1]
 print(solve(A))
+print(solve1(A))
