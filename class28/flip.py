@@ -20,7 +20,7 @@ def solve(A):
             start = s
         elif curr_sum < 0:
             curr_sum =0
-            s = i +1
+            start = i +1
 
     if start == (1 << 31) -1:
         return []
