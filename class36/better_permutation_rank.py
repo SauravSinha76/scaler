@@ -5,18 +5,21 @@ def fact(n):
 
 def count_lesser(A,index):
     n = len(A)
-    freq = {}
     count =0
+    for i in range(index+1, n):
+        if A[index] > A[i]:
+            count += 1
+    return count
+
+def duplicate(A,index):
+    n = len(A)
+    freq = {}
     ans =1
-    for i in range(n):
+    for i in range(index,n):
         freq[A[i]] = freq.get(A[i],0)+1
     for a in freq:
-        if A[index] >= a:
             ans *= fact(freq[a])
-    if ans  == 1:
-        return 0
-    else:
-        return ans
+    return ans
 
 
 def solve(A):
@@ -26,8 +29,8 @@ def solve(A):
     for i in range(n):
         factorial //= n-i
         lesser = count_lesser(A,i)
-        if lesser != 0:
-            rank += factorial // lesser
+        den = duplicate(A,i)
+        rank += factorial * lesser // den
     return rank
 
 
