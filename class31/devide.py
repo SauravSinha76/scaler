@@ -23,7 +23,28 @@ def solve(A, B):
         return (1 << 31) -1
     return quotient
 
+def divide( A, B):
+    sign = -1 if (A < 0) ^ (B < 0) else 1
 
-A = -2147483648
-B = -1
+    dividend = abs(A)
+    divisor = abs(B)
+
+    qua = 0
+    temp = 0
+
+    for i in range(31, -1, -1):
+        if temp + (divisor << i) <= dividend:
+            temp += divisor << i
+            qua |= 1 << i
+
+    qua *= sign
+
+    if qua > (1 << 31) - 1:
+        return (1 << 31) - 1
+    return qua
+
+print(1 << 31 -1)
+A = 2147483647
+B = 1
 print(solve(A,B))
+print(divide(A,B))

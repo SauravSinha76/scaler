@@ -35,6 +35,6 @@ def solve1(A):
 
     reverse(A,i+1,n-1)
     return A
-A = [1,5,3,4,2]
+A = [1,3,2]
 # print(solve(A))
 print(solve1(A))
