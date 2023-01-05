@@ -39,6 +39,27 @@ def countDigitOne(n):
         i *= 10
 
     return countr
-print(solve(101))
-print(solve1(101))
+
+def countone(n):
+    base =1
+    r =0
+    ans =0
+    while n > 0:
+        c = n % 10
+        l = n // 10
+
+        if c < 1:
+            ans += l * base
+        elif c == 1:
+            ans += (l * base) + r + 1
+        else:
+            ans += (l+1)*base
+
+        r += c*base
+        base *= 10
+        n //= 10
+    return ans
+print(solve(920))
+print(solve1(920))
 print(countDigitOne(101))
+print(countone(101))
