@@ -9,30 +9,30 @@ def solve(A):
     return count
 
 def merge(A,l,mid,r):
-    i = l
-    j = mid + 1
-    inv_count = 0
+    # i = l
+    # j = mid + 1
+    # inv_count = 0
 
-    while i <= mid:
-        while j <= r and A[i] > A[j]:
-            j += 1
-        inv_count += j - (mid + 1)
-        i += 1
+    # while i <= mid:
+    #     while j <= r and A[i] > A[j]:
+    #         j += 1
+    #     inv_count += j - (mid + 1)
+    #     i += 1
 
     i = l
-    j = mid+1
+    j = mid
     C =[]
-    # inv_count =0
-    while i <= mid and j <= r:
+    inv_count =0
+    while i < mid and j <= r:
         if A[i] <= A[j]:
             C.append(A[i])
             i += 1
         else:
-            # inv_count += (mid - i +1)
+            inv_count += (mid - i)
             C.append(A[j])
             j +=1
 
-    while i <= mid:
+    while i < mid:
         C.append(A[i])
         i += 1
     while j <= r:
@@ -55,7 +55,7 @@ def merge_sort(A,l,r):
 
     inv_count += merge_sort(A,l,mid)
     inv_count += merge_sort(A,mid+1,r)
-    inv_count += merge(A,l,mid,r)
+    inv_count += merge(A,l,mid+1,r)
     return inv_count
 
 
