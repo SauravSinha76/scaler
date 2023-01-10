@@ -21,5 +21,6 @@ def solve(A):
 
 
 A = [0,0,0,0]
+A = [3, 30, 34, 5, 9]
 print(solve(A))
 print("30" == "3")
