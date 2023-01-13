@@ -58,5 +58,6 @@ def merge_sort(A,l,r):
 
 A = [1, 3, 2, 3, 1]
 # A = [4, 1, 2]
+A =[1,10,15,16,4,5,12,13]
 print(solve(A))
 print(merge_sort(A,0,len(A)-1))

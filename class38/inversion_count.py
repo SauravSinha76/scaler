@@ -20,19 +20,19 @@ def merge(A,l,mid,r):
     #     i += 1
 
     i = l
-    j = mid
+    j = mid+1
     C =[]
     inv_count =0
-    while i < mid and j <= r:
+    while i <= mid and j <= r:
         if A[i] <= A[j]:
             C.append(A[i])
             i += 1
         else:
-            inv_count += (mid - i)
+            inv_count += (mid - i + 1)
             C.append(A[j])
             j +=1
 
-    while i < mid:
+    while i <= mid:
         C.append(A[i])
         i += 1
     while j <= r:
@@ -55,7 +55,7 @@ def merge_sort(A,l,r):
 
     inv_count += merge_sort(A,l,mid)
     inv_count += merge_sort(A,mid+1,r)
-    inv_count += merge(A,l,mid+1,r)
+    inv_count += merge(A,l,mid,r)
     return inv_count
 
 

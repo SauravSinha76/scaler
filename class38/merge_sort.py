@@ -20,6 +20,7 @@ def merge(L,R,A):
         A[k] = R[j]
         j += 1
         k += 1
+
 def merge_sort(A):
     if len(A) > 1:
 
