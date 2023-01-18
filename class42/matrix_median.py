@@ -30,19 +30,20 @@ def solve(A):
         max_val = max(max_val,A[i][m-1])
 
 
-    desired = (m * n + 1)//2
-
-    while min_val < max_val:
+    desired = (m * n)//2
+    ans =0
+    while min_val <= max_val:
         pos = 0
-        mid = min_val + ( max_val - min_val) // 2
+        mid = (min_val + max_val) // 2
         for i in range(n):
            pos += rec_upper_bound(0,len(A[i])-1, mid,A[i])
-        if pos < desired:
+        if pos <= desired:
+            ans = mid
             min_val = mid + 1
         else:
-            max_val = mid
+            max_val = mid - 1
 
-    return min_val
+    return ans
 
 A = [
     [1, 3, 5],
