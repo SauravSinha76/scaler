@@ -5,7 +5,7 @@ def solve(A):
         left =0
         for j in range(i-1,-1,-1):
             if A[j] < A[i]:
-                left +=1
+                left += 1
 
         right =0
         for j in range(i+1,n):
