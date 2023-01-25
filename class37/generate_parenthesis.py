@@ -12,4 +12,5 @@ def solve(n,open,close,paran,ans):
 ans = []
 n = 3
 solve(n,0,0,"",ans)
+print(len(ans))
 print(ans)

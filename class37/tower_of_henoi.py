@@ -5,7 +5,8 @@ def toh(n,source,destination,auxillari,ans):
     ans.append([n,source,destination])
     toh(n-1,auxillari,destination,source,ans)
 
-A = 3
+A = 6
 ans =[]
 toh(A,1,3,2,ans)
+print(len(ans))
 print(ans)
