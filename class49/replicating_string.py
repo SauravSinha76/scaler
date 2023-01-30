@@ -1,7 +1,7 @@
-def solev(A,B):
-
+def solve(A,B):
     n = len(B)
-    hm = {}
+
+    hm ={}
 
     for i in range(n):
         hm[B[i]] = hm.get(B[i],0) + 1
@@ -15,4 +15,4 @@ A = 2
 B = "bbaabb"
 A = 1
 B = "bc"
-print(solev(A,B))
+print(solve(A,B))
