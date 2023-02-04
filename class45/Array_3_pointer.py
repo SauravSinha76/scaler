@@ -6,7 +6,7 @@ def solve(A,B,C):
     while p1 < len(A) and p2 < len(B) and p3 < len(C):
         diff1 = abs(A[p1] - B[p2])
         diff2 = abs(B[p2] - C[p3])
-        diff3=  abs(A[p1] - C[p3])
+        diff3 = abs(A[p1] - C[p3])
 
         tmp = max(max(diff1,diff2),diff3)
 
