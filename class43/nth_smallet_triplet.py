@@ -27,7 +27,7 @@ def solve(A,B):
 
         pos = count_less_then(A, mid)
 
-        if pos <= B:
+        if pos < B:
             ans = mid
             min_val = mid + 1
         else:
