@@ -30,6 +30,23 @@ def solve(A,B):
                 R = j - 1
     return Z
 
+def solvr_brute(A,B):
+    C = B+"$"+A
+
+    n = len(C)
+
+    Z = []
+
+    for i in range(1,n):
+        k = 0
+        j = i
+        while j < n and C[j] == C[k]:
+            k += 1
+            j += 1
+        Z.append(k)
+    return Z
+
 A = "mynameissaurav"
 B ="meis"
 print(solve(A,B))
+print(solvr_brute(A,B))
