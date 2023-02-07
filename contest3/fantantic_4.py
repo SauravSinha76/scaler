@@ -27,37 +27,65 @@ def pair_count(A,B):
 def solve(A):
 
     n = len(A)
-
+    hm =[0] * 4
     for i in range(n):
         A[i] = A[i] % 4
+        hm[A[i] % 4] += 1
 
-    A.sort()
-    print(A)
+    print(hm)
+    count =0
 
-    low = 0
-    high = n - 1
-    ans =-1
-    while low <= high:
-        mid = (low + high) // 2
+    val = min(hm[1],hm[3])
+    count += val
+    hm[1] -= val
+    hm[3] -= val
 
-        if A[mid] > 0:
-            high = mid -1
-        else:
-            ans = mid
-            low = mid + 1
-    count = pair_count(A,4)
-    if (n - ans -1)/ 2 == count:
-        return count
-    else:
+    while hm[3] >= 2:
+        hm[3] -= 2
+        hm[2] += 1
+        count += 1
+
+    while hm[1] >= 2:
+        hm[1] -= 2
+        hm[2] += 1
+        count += 1
+
+
+    count += hm[2] // 2
+    hm[2] %= 2
+    if hm[1] != 0 or hm[2] != 0 or hm[3] != 0:
         return -1
+    return count
+    # return count
+
+
+    # A.sort()
+    # print(A)
+    #
+    # low = 0
+    # high = n - 1
+    # ans =-1
+    # while low <= high:
+    #     mid = (low + high) // 2
+    #
+    #     if A[mid] > 0:
+    #         high = mid -1
+    #     else:
+    #         ans = mid
+    #         low = mid + 1
+    # count = pair_count(A,4)
+    # if (n - ans -1)/ 2 == count:
+    #     return count
+    # else:
+    #     return -1
 
 
 
 A =[1,3,4,4,2,2]
 A =[4,2,2]
 A = [1,2,3,1,2,3,8]
-A = [2,2,2,2]
-A = [1,1,3,2]
-A =[2]
-A =[3,3,3,3]
+# A = [2,2,2,2]
+# A = [1,1,3,2]
+# A =[2]
+# A =[3,3,3,3]
 print(solve(A))

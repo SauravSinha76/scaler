@@ -1,3 +1,6 @@
+import bisect
+
+
 def solve(A,B,C):
     candies =[0] * A
 
@@ -15,21 +18,22 @@ def solve(A,B,C):
 
     candies.sort()
     ans =[]
-
+    # bisect.bisect_left(candies,)
     for c in C:
-        count =0
-        low = 0
-        high = A-1
+        # count =0
+        # low = 0
+        # high = A-1
+        #
+        # while low <= high:
+        #     mid = (low + high) // 2
+        #
+        #     if candies[mid] < c:
+        #         low = mid +1
+        #     else:
+        #         high = mid -1
 
-        while low <= high:
-            mid = (low + high) // 2
-
-            if candies[mid] < c:
-                low = mid +1
-            else:
-                count = A - mid
-                high = mid -1
-        ans.append(count)
+        high = bisect.bisect_left(candies,c)
+        ans.append( A - high )
     print(candies)
     return ans
 
@@ -40,12 +44,12 @@ B =[[1,2],
     ]
 C = [1,2,3]
 
-A = 4
-B = [
-    [3,4],
-    [2,3]
-]
-C =[2,2]
+# A = 4
+# B = [
+#     [3,4],
+#     [2,3]
+# ]
+# C =[2,2]C
 print(solve(A,B,C))
 
 
