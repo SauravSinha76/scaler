@@ -16,16 +16,29 @@ def count_less_then(A,ele):
             count += right -(j+1)
     return count
 
+def cntoftripletlessthank(A, k):
+    cnt = 0
+    n = len(A)
+    for i in range(n):
+        s, e = i + 1, len(A) - 1
+        while (s < e):
+            if (A[i] + A[s] + A[e] < k):
+                cnt += e - s
+                s += 1
+            else:
+                e -= 1
+    return cnt
+
 def solve(A,B):
     A.sort()
     n = len(A)
-    min_val = 1
+    min_val = A[0]
     max_val = A[n-1] + A[n-2] + A[n-3]
     ans = 0
     while min_val <= max_val:
         mid = (min_val + max_val) // 2
 
-        pos = count_less_then(A, mid)
+        pos = cntoftripletlessthank(A, mid)
 
         if pos < B:
             ans = mid
