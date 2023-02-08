@@ -12,24 +12,28 @@ class Stack:
         self.middle = None
         self.size = 0
 
+    def print_stack(self):
+        tem = self.head
+        while tem:
+            print(tem.val,end=" ")
+            tem = tem.next
 
     def push(self,x):
         node = Node(x)
-        if self.size <= 0:
+        if self.size == 0:
             self.head = node
             self.middle = node
-        elif self.size <= 1:
-            node.prv = self.head
-            self.head.next = node
+        elif self.size == 1:
+            node.next = self.head
+            self.head.prv = node
             self.head = node
             self.middle = self.head
         else:
-            node.prv = self.head
-            self.head.next = node
+            node.next = self.head
+            self.head.prv = node
             self.head = node
             if self.size % 2 == 1:
                 self.middle = self.middle.next
-
         self.size += 1
     def get_middle_value(self):
         if self.middle:
@@ -38,16 +42,18 @@ class Stack:
             return -1
 
     def delete_middle(self):
-        if self.size <= 0:
-            return
-        elif self.size <= 1:
+        if self.size <= 1:
             self.head = None
             self.middle = None
+        elif self.size == 2:
+            self.head = self.head.prv
+            self.middle = self.head
+            self.head.next = None
         else:
             if self.size % 2 == 0:
-                self.middle = self.middle.prv
-            else:
                 self.middle = self.middle.next
+            else:
+                self.middle = self.middle.prv
         self.size -= 1
 
 
@@ -62,15 +68,15 @@ class Stack:
             self.middle = None
         elif self.size <= 2:
             x = self.head.val
-            self.head = self.head.prv
-            self.head.next = None
-            self.middle = self.middle.prv
+            self.head = self.head.next
+            self.head.prv = None
+            self.middle = self.middle.next
         else:
             x = self.head.val
-            self.head = self.head.prv
-            self.head.next = None
+            self.head = self.head.next
+            self.head.pev = None
             if self.size % 2 == 0:
-                self.middle = self.middle.prv
+                self.middle = self.middle.next
         self.size -= 1
         return x
 
@@ -90,7 +96,7 @@ class Solution:
                 ans.append(stack.get_middle_value())
             else:
                 stack.delete_middle()
-
+        stack.print_stack()
         return ans
 
 
@@ -125,7 +131,7 @@ A =[
   [2, 0],
   [2, 0]
 ]
-
+#
 A =[
   [1, 548],
   [1, 663],
