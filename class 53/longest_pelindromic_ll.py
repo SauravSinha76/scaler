@@ -20,7 +20,7 @@ def solve(A):
         curr.next = prv
 
 
-        ans = max(ans, 2 * count_length(prv, tmp))
+        ans = max(ans, 2 * count_length(prv, tmp) + 1)
 
         ans = max(ans, 2 * count_length(curr, tmp))
 
