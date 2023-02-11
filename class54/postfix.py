@@ -64,4 +64,8 @@ c = Conversion()
 A = "x^y/(a*z)+b"
 A = "a+b*(c^d-e)^(f+g*h)-i"
 A = "q+(c*t)*o+(g*g)+q*(i-a)*p-(i*l)"
+A = "-(a+b+c)"
+print(c.postfix(A))
+c = Conversion()
+A = "-a-b-c"
 print(c.postfix(A))
