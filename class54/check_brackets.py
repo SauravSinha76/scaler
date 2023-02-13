@@ -7,9 +7,13 @@ def solve(A,B):
     for a in A:
         if a == '(' and len(stack) != 0 and stack[-1] == '-':
             global_sign = not global_sign
-            stack.pop()
+            stack.append(a)
         elif a == ')':
-            global_sign = not  global_sign
+            while len(stack) != 0 and stack[-1] != '(':
+                stack.pop()
+            stack.pop()
+            if len(stack) != 0 and stack[-1] == '-':
+                global_sign = not global_sign
         elif a.isalpha():
             if len(stack) != 0 and stack[-1] == '-':
                 if global_sign:
@@ -26,14 +30,20 @@ def solve(A,B):
     for a in B:
         if a == '(' and len(stack) != 0 and stack[-1] == '-':
             global_sign = not global_sign
+            stack.append(a)
+        elif a == ')':
+            while len(stack) != 0 and stack[-1] != '(':
+                stack.pop()
             stack.pop()
+            if len(stack) != 0 and stack[-1] == '-':
+                global_sign = not global_sign
         elif a.isalpha():
             if len(stack) != 0 and stack[-1] == '-':
                 if global_sign:
                     hm2[a] = False
                 else:
                     hm2[a] = True
-                    stack.pop()
+                stack.pop()
             else:
                 hm2[a] = global_sign
         else:
