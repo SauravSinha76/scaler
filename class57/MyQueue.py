@@ -13,7 +13,8 @@ class MyQueue:
     def enqueue(self,x):
         node = Node(x)
         if self.tail:
-            self.tail = node
+            self.tail.next = node
+            self.tail = self.tail.next
         else:
             self.tail = node
             self.head = node
@@ -29,5 +30,3 @@ class MyQueue:
     def front(self):
         if self.head:
             return self.head.val
-        else:
-            print("Queue is empty")
