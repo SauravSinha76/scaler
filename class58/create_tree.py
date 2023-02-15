@@ -6,7 +6,7 @@ def build_tree(B,start,end,pos,hm):
         return
     root = Node(B[pos])
     idx = hm[B[pos]]
-    root.left = build_tree(B,start,idx -1,idx -1,hm)
+    root.left = build_tree(B,start,idx -1,pos - (end -idx) -1,hm)
     root.right = build_tree(B,idx+1,end,pos-1,hm)
     return root
 
@@ -20,7 +20,6 @@ def inorder(root):
 def solve(A,B):
     hm ={}
     n1 = len(A)
-    n2 = len(B)
     for i in range(n1):
         hm[A[i]] = i
 
