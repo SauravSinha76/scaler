@@ -6,7 +6,7 @@ from class58.TreeNode import Node
 def solve(A):
 
     queue = deque()
-
+    stack =[]
     ans =[]
     dummy = Node(-1)
     queue.append(A)
@@ -17,23 +17,27 @@ def solve(A):
         r = queue.popleft()
 
         if r == dummy:
+            while len(stack) != 0:
+                row.append(stack.pop())
+            stack =[]
             ans.append(row)
             row =[]
             flag = not flag
             queue.append(dummy)
         else:
-            row.append(r.val)
-
             if flag:
-                if r.left:
-                    queue.append(r.left)
-                if r.right:
-                    queue.append(r.right)
+                row.append(r.val)
             else:
-                if r.right:
-                    queue.append(r.right)
-                if r.left:
-                    queue.append(r.left)
+                stack.append(r.val)
+
+            if r.left:
+                queue.append(r.left)
+            if r.right:
+                queue.append(r.right)
+
+
+    while len(stack) != 0:
+        row.append(stack.pop())
     ans.append(row)
     return ans
 

@@ -1,13 +1,14 @@
 from class58.TreeNode import Node
 
 
-def build_tree(B,start,end,pos,hm):
-    if start > end:
+def build_tree(B,pstart,pend,iend,hm):
+    if pstart > pend:
         return
-    root = Node(B[pos])
-    idx = hm[B[pos]]
-    root.left = build_tree(B,start,idx -1,pos - (end -idx) -1,hm)
-    root.right = build_tree(B,idx+1,end,pos-1,hm)
+    root = Node(B[pend])
+    idx = hm[B[pend]]
+    l = iend - idx
+    root.left = build_tree(B,pstart,pend-l-1,idx-1,hm)
+    root.right = build_tree(B,pend - l,pend-1,iend,hm)
     return root
 
 def inorder(root):

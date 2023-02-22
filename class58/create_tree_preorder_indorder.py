@@ -2,13 +2,14 @@ from class58.TreeNode import Node
 
 import sys
 sys.setrecursionlimit(10000)
-def build_tree(A,start,end,pos,hm):
-    if start > end:
+def build_tree(A,pstart,pend,istart,hm):
+    if pstart > pend:
         return
-    root = Node(A[pos])
-    idx = hm[A[pos]]
-    root.left = build_tree(A,start,idx -1,pos +1,hm)
-    root.right = build_tree(A,idx+1,end,pos + (idx -start) +1,hm)
+    root = Node(A[pstart])
+    idx = hm[A[pstart]]
+    l = idx - istart
+    root.left = build_tree(A,pstart+1,pstart+l,istart,hm)
+    root.right = build_tree(A,pstart+l+1,pend,idx+ 1,hm)
     return root
 
 def inorder(root):
