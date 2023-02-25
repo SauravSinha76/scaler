@@ -16,6 +16,22 @@ def getEndingIndex(str1, n, i):
 
     return i - 1
 
+class Pair:
+    def __init__(self,len,count):
+        self.len = len
+        self.count = count
+
+    def __str__(self):
+        return f"len= {self.len}, count= {self.count}"
+
+    def __repr__(self):
+        return f"len= {self.len}, count= {self.count}"
+    def __eq__(self, other):
+        if self.len == other.len and self.len == other.len:
+            return True
+        return False
+    def __hash__(self):
+        return hash(self.len) + hash(self.count)
 
 def largestSubstr1(str1,B):
     Len = 0
@@ -32,7 +48,7 @@ def largestSubstr1(str1,B):
         # Update the Length
         Len = max(end - i + 1, Len)
         i = end + 1
-    return Len,count
+    return Pair(Len,count)
 
 
 def solve(A,B,C):
@@ -40,15 +56,18 @@ def solve(A,B,C):
     hm ={}
 
     for i in range(len(A)):
-        length,count = largestSubstr1(A[i],B)
-        if count in hm:
-            if length in hm[count]:
-                hm[count][length].append(A[i])
-            else:
-                hm[count][length] = [A[i]]
+        p= largestSubstr1(A[i],B)
+        if p not in hm:
+            hm[p] = i
+
+    ans =[]
+    for c in C:
+        idx = hm.get(Pair(c[0],c[1]),-1)
+        if idx == -1:
+            ans.append("NULL")
         else:
-            hm[count] ={length:[A[i]]}
-    return hm
+            ans.append(A[idx])
+    return ans
 
 A =["abaclmn","abdwx","aabc","aab","oxyps","ercd"]
 B = "a"
