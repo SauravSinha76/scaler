@@ -57,10 +57,12 @@ def diameter(root):
     return max(lheight + rheight + 1, max(ldiameter, rdiameter))
 
 
+
 class Soution:
     def solve_1(self, A):
         # count for max len diameter found
         self.maxans = 0
+        self.diameter = 0
 
         def diameterlen(node):
             if not node: return 0
@@ -79,6 +81,14 @@ class Soution:
         return self.maxans
 
 
+    def solve_2(self,A):
+        if A is None:
+            return -1
+        l = self.solve_2(A.left)
+        r = self.solve_2(A.right)
+        self.diameter = max(self.diameter, l + r + 2)
+        return max(l,r) +1
+
 root = Node(1)
 root.left = Node(2)
 root.right = Node(3)
@@ -91,5 +101,7 @@ root.left.left = Node(4)
 print(solve(root))
 sol = Soution()
 print(sol.solve_1(root))
+sol.solve_2(root)
+print(sol.diameter)
 
 
