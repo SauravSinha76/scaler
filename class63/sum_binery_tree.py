@@ -16,7 +16,7 @@ def check(A):
     def solve(self, A):
         ans = [1]
 
-        def sum_binary_tree(root: TreeNode):
+        def sum_binary_tree(root):
             if not root:
                 return 0
 

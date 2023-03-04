@@ -1,65 +1,60 @@
-class Trie_Node:
-    def __init__(self, char):
-        self.val = char
-        self.edges = {}
-        self.isEnd = False
-
+class TrieNode:
+    def __init__(self):
+        self.childs = {}
+        self.is_end = False
+        self.word_idxes = []
 
 class Trie:
     def __init__(self):
-        self.root = Trie_Node(None)
+        self.root = TrieNode()
+    def get_root(self):
+        return self.root
 
-    def insert(self, word: str) -> None:
-        cur_node = self.root
-        for char in word:
-            if char not in cur_node.edges:
-                cur_node.edges[char] = Trie_Node(char)
-            cur_node = cur_node.edges[char]
-        cur_node.isEnd = True
+    def insert(self, string, index):
+        curr = self.get_root()
+        for ch in string:
+            if curr.childs.get(ch) is None:
+                new_node = TrieNode()
+                curr.childs[ch] = new_node
+            curr = curr.childs[ch]
+            if len(curr.word_idxes) < 5:
+                curr.word_idxes.append(index)
+        curr.is_end = True
 
-    def search(self, word: str) -> bool:
-        def dfs(indx, diff, root):
-            if indx == len(word):
-                return (diff == 0) and root.isEnd
+    def getPrefixNode(self, prefix):
+        curr = self.get_root()
+        for i in range(len(prefix)):
+            ch = prefix[i]
+            if curr.childs.get(ch) == None:
+                return []
+            curr = curr.childs[ch]
+        return curr.word_idxes
 
-            cur_node = root
-            char = word[indx]
-            if char in cur_node.edges:
-                cur_node = cur_node.edges[char]
-                val = dfs(indx + 1, diff, cur_node)
-                if val == True:
-                    return True
+def solve(A, B, Q):
+    trie = Trie()
+    words = [(A[i], B[i]) for i in range(len(A))]
+    words.sort(key = lambda x: x[1], reverse=True)
 
-            if diff == 1:
-                diff = 0
-                cur_node = root
-                for c, j in cur_node.edges.items():
-                    if c != char:
-                        val = dfs(indx + 1, diff, j)
-                        if val == True:
-                            return True
-            return False
+    for i in range(len(words)):
+        word = words[i][0]
+        trie.insert(word, index=i)
+    for pref in Q:
+        prefIndexes = trie.getPrefixNode(pref)
+        if len(prefIndexes) == 0:
+            print('-1', end=' ')
+        else:
+            for idx in prefIndexes:
+                print(words[idx][0], end=' ')
+        print()
 
-        return dfs(0, 1, self.root)
+def main():
+    tc = int(input())
+    for _ in range(tc):
+        n, m = input().split()
+        A = input().split() # words in dict
+        B = list(int(x) for x in input().split()) # word weight
+        Q = input().split() # Queries
+        solve(A, B, Q)
 
-
-class Solution:
-    # @param A : list of strings
-    # @param B : list of strings
-    # @return a strings
-    def solve(self, A, B):
-        trie = Trie()
-        for i in A:
-            trie.insert(i)
-        ans = ''
-        for j in B:
-            if trie.search(j):
-                ans = ans + '1'
-            else:
-                ans = ans + '0'
-        return ans
-
-
-A = ['data', 'circle', 'cricket']
-B = ['date', 'circel', 'crikket', 'data', 'circl']
-print(Solution().solve(A,B))
+if __name__ == '__main__':
+    main()

@@ -19,12 +19,14 @@ class Solution:
 
         while (2 * i) + 1 < size:
             x = min(self.heap[i], self.heap[(2* i)+ 1])
+            if size < (2*i) + 2:
+                x = min(x , self.heap[(2*i) + 2])
             if x == self.heap[i]:
                 break
             elif x == self.heap[(2* i)+ 1]:
                 self.heap[i], self.heap[(2* i)+ 1] = self.heap[(2* i)+ 1] , self.heap[i]
                 i = (2* i)+ 1
-            elif size < (2*i) + 2 and self.heap[(2*i) + 2] < x:
+            else:
                 self.heap[i], self.heap[(2 * i) + 2] = self.heap[(2 * i) + 2], self.heap[i]
                 i = (2 * i) + 2
 
@@ -59,7 +61,7 @@ def solve( A):
     return sums
 
 A = [1, 2, 3, 4, 5]
-# A = [5, 17, 100, 11]
+# # A = [5, 17, 100, 11]
 A = [ 16, 7, 3, 5, 9, 8, 6, 15 ]
 print(Solution().solve(A))
 print(solve(A))
