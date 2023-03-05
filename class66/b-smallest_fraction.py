@@ -1,0 +1,21 @@
+import heapq
+
+def solve(A, B):
+
+    N = len(A)
+    heap = []
+
+    for i in range(N):
+        for j in range(i + 1, N):
+            frac = -(A[i] / A[j])
+            if len(heap) == B:
+                heapq.heappushpop(heap, (frac, A[i], A[j]))
+            else:
+                heapq.heappush(heap, (frac, A[i], A[j]))
+    ans = heapq.heappop(heap)
+    return [ans[1], ans[2]]
+
+
+A = [1, 2, 3, 5]
+B = 3
+print(solve(A,B))
