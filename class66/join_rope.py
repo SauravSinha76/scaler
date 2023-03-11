@@ -19,7 +19,7 @@ class Solution:
 
         while (2 * i) + 1 < size:
             x = min(self.heap[i], self.heap[(2* i)+ 1])
-            if size < (2*i) + 2:
+            if size > (2*i) + 2:
                 x = min(x , self.heap[(2*i) + 2])
             if x == self.heap[i]:
                 break
@@ -44,9 +44,10 @@ class Solution:
         print(self.heap)
         ans = 0
         while len(self.heap) > 1:
-            cost = self.remove() + self.remove()
-            self.insert(cost)
-            ans += cost
+            x = self.remove()
+            y = self.remove()
+            self.insert(x + y)
+            ans += x + y
         return ans
 
 import heapq

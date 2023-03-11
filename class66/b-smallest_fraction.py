@@ -16,6 +16,21 @@ def solve(A, B):
     return [ans[1], ans[2]]
 
 
-A = [1, 2, 3, 5]
+def solve1(A,B):
+
+    N = len(A)
+    heap = []
+
+    for i in range(N):
+
+        if len(heap) == B:
+            heapq.heappushpop(heap, -A[i])
+        else:
+            heapq.heappush(heap, -A[i])
+    ans = heapq.heappop(heap)
+    return  - ans
+
+
+A = [1, 2, 3, 5,6,9,4,-1]
 B = 3
-print(solve(A,B))
+print(solve1(A,B))
