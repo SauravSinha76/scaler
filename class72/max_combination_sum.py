@@ -93,5 +93,5 @@ def solve(A):
 A =[[1, 2, 3, 4],
     [2, 3, 4, 5]
     ]
-# print(solve1(0,len(A),A,0))
+print(solve1(0,len(A),A,0))
 print(solve(A))
